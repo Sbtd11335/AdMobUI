@@ -9,7 +9,6 @@
 
 import SwiftUI
 import GoogleMobileAds
-import LBTATools
 
 internal class _UINativeAdView: NativeAdView {
     override init(frame: CGRect) {

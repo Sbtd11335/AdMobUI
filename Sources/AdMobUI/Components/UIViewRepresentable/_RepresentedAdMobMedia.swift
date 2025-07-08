@@ -9,7 +9,6 @@
 
 import SwiftUI
 import GoogleMobileAds
-import LBTATools
 
 internal struct _RepresentedAdMobMedia: UIViewRepresentable {
 //    typealias UIViewType = MediaView
