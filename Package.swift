@@ -14,17 +14,10 @@ let package = Package(
     ],
     dependencies: [
         .package(
-            name: "GoogleMobileAds",
             url: "https://github.com/googleads/swift-package-manager-google-mobile-ads.git",
             .upToNextMajor(
                 from: "12.6.0"
             )
-        )
-    ],
-    dependencies: [
-        .package(
-            url: "https://github.com/googleads/swift-package-manager-google-mobile-ads?tab=readme-ov-file",
-            .upToNextMajor(from: "12.6.0")
         )
     ],
     targets: [
@@ -33,9 +26,7 @@ let package = Package(
         .target(
             name: "AdMobUI",
             dependencies: [
-                .byName(
-                    name: "GoogleMobileAds"
-                )
+                .product(name: "GoogleMobileAds", package: "swift-package-manager-google-mobile-ads")
             ]
         ),
 
