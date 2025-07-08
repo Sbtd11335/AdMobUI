@@ -1,10 +1,10 @@
 {
-  "originHash" : "755ed9423fa918d0a136b185d6c02d2a38fb8505b5ed3de28e35c8848c572b88",
+  "originHash" : "e09d61295cb55be0f4beb2283728b024d943c0e61e2d7f149bdf1d735f9b386e",
   "pins" : [
     {
-      "identity" : "swift-package-manager-google-mobile-ads?tab=readme-ov-file",
+      "identity" : "swift-package-manager-google-mobile-ads",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/googleads/swift-package-manager-google-mobile-ads?tab=readme-ov-file",
+      "location" : "https://github.com/googleads/swift-package-manager-google-mobile-ads.git",
       "state" : {
         "revision" : "946770157e526c0fa8807ed516c3d9f81106e30a",
         "version" : "12.6.0"
