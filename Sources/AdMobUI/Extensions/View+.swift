@@ -6,6 +6,7 @@
 //  
 //
 
+import SwiftUI
 
 extension View {
     public func nativeAdAnchor(_ anchorViewType: NativeAdChildViewType) -> some View {

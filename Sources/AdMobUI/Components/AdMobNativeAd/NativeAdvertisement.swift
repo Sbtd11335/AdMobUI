@@ -60,7 +60,3 @@ public struct NativeAdvertisement<AdContent: View>: View {
             }
     }
 }
-
-#Preview {
-    NativeAdvertisement()
-}
