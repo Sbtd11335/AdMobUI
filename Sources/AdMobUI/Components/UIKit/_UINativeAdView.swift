@@ -1,14 +1,13 @@
 //
 //  _UINativeAdView.swift
 //  AdMob-SwiftUI
-//  
+//
 //  Created by Takashi Ushikoshi on 2025/07/09.
-//  
+//
 //
 
-
-import SwiftUI
 import GoogleMobileAds
+import SwiftUI
 
 internal class _UINativeAdView: NativeAdView {
     override init(frame: CGRect) {

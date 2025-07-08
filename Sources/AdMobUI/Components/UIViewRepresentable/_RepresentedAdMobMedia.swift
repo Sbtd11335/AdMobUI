@@ -1,17 +1,16 @@
 //
 //  _RepresentedAdMobMedia.swift
 //  AdMob-SwiftUI
-//  
+//
 //  Created by Takashi Ushikoshi on 2025/07/09.
-//  
+//
 //
 
-
-import SwiftUI
 import GoogleMobileAds
+import SwiftUI
 
 internal struct _RepresentedAdMobMedia: UIViewRepresentable {
-//    typealias UIViewType = MediaView
+    //    typealias UIViewType = MediaView
     typealias UIViewType = UIView
 
     private let mediaContent: MediaContent?
@@ -29,7 +28,7 @@ internal struct _RepresentedAdMobMedia: UIViewRepresentable {
         mediaView.translatesAutoresizingMaskIntoConstraints = true
         mediaView.backgroundColor = .clear
 
-        mediaView.autoresizingMask = [.flexibleWidth, .flexibleHeight] // ← SwiftUIからサイズを受ける
+        mediaView.autoresizingMask = [.flexibleWidth, .flexibleHeight]  // ← SwiftUIからサイズを受ける
         mediaView.frame = containerView.bounds
 
         containerView.addSubview(mediaView)

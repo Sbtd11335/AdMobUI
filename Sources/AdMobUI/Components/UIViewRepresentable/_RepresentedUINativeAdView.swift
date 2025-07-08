@@ -1,14 +1,13 @@
 //
 //  _RepresentedUINativeAdView.swift
 //  AdMob-SwiftUI
-//  
+//
 //  Created by Takashi Ushikoshi on 2025/07/09.
-//  
+//
 //
 
-
-import SwiftUI
 import GoogleMobileAds
+import SwiftUI
 
 internal struct _RepresentedUINativeAdView: UIViewRepresentable {
     typealias UIViewType = _UINativeAdView
@@ -33,7 +32,7 @@ internal struct _RepresentedUINativeAdView: UIViewRepresentable {
                 nativeAdView.leadingAnchor.constraint(equalTo: superview.leadingAnchor),
                 nativeAdView.trailingAnchor.constraint(equalTo: superview.trailingAnchor),
                 nativeAdView.topAnchor.constraint(equalTo: superview.topAnchor),
-                nativeAdView.bottomAnchor.constraint(equalTo: superview.bottomAnchor)
+                nativeAdView.bottomAnchor.constraint(equalTo: superview.bottomAnchor),
             ])
         }
 
@@ -149,10 +148,12 @@ internal struct _RepresentedUINativeAdView: UIViewRepresentable {
 
             NSLayoutConstraint.deactivate(view.constraints)
             NSLayoutConstraint.activate([
-                view.leadingAnchor.constraint(equalTo: nativeAdView.leadingAnchor, constant: frame.origin.x),
-                view.topAnchor.constraint(equalTo: nativeAdView.topAnchor, constant: frame.origin.y),
+                view.leadingAnchor.constraint(
+                    equalTo: nativeAdView.leadingAnchor, constant: frame.origin.x),
+                view.topAnchor.constraint(
+                    equalTo: nativeAdView.topAnchor, constant: frame.origin.y),
                 view.widthAnchor.constraint(equalToConstant: frame.width),
-                view.heightAnchor.constraint(equalToConstant: frame.height)
+                view.heightAnchor.constraint(equalToConstant: frame.height),
             ])
         }
 

@@ -1,14 +1,13 @@
 //
 //  NativeAdvertisement.swift
 //  AdMob-SwiftUI
-//  
+//
 //  Created by Takashi Ushikoshi on 2025/07/09.
-//  
+//
 //
 
-
-import SwiftUI
 import GoogleMobileAds
+import SwiftUI
 
 public struct NativeAdvertisement<AdContent: View>: View {
     @StateObject private var nativeAdLoader: NativeAdLoader
@@ -37,15 +36,17 @@ public struct NativeAdvertisement<AdContent: View>: View {
         adContent(loadedAd, nativeAdLoader.error)
             .overlayPreferenceValue(NamedAnchorBoundsPreferenceKey.self, alignment: .center) { namedAnchors in
                 GeometryReader { overlayGeometry in
-                    let elementFrames: [NativeAdChildViewType: CGRect] = (try? namedAnchors?.reduce<[NativeAdChildViewType: CGRect]>([:]) { partialResult, namedAnchor in
-                        let (name, anchor) = namedAnchor
+                    let elementFrames: [NativeAdChildViewType: CGRect] =
+                        (try? namedAnchors?.reduce<[NativeAdChildViewType: CGRect]>([:]) {
+                            partialResult, namedAnchor in
+                            let (name, anchor) = namedAnchor
 
-                        let viewType: NativeAdChildViewType? = .init(rawValue: name)
+                            let viewType: NativeAdChildViewType? = .init(rawValue: name)
 
-                        guard let viewType else { return partialResult }
+                            guard let viewType else { return partialResult }
 
-                        return partialResult.merging([viewType: overlayGeometry[anchor]]) { $1 }
-                    }) ?? [:]
+                            return partialResult.merging([viewType: overlayGeometry[anchor]]) { $1 }
+                        }) ?? [:]
 
                     _RepresentedUINativeAdView(
                         nativeAd: loadedAd,

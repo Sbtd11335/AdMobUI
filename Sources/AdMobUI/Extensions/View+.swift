@@ -1,9 +1,9 @@
 //
 //  View+.swift
 //  AdMobSwiftUI
-//  
+//
 //  Created by Takashi Ushikoshi on 2025/07/09.
-//  
+//
 //
 
 import SwiftUI
