@@ -18,6 +18,6 @@ public struct AdvertisementMedia: View {
 
     public var body: some View {
         _RepresentedAdMobMedia(mediaContent: mediaContent)
-            .nativeAdAnchor(.media)
+            .nativeAdElement(.media)
     }
 }

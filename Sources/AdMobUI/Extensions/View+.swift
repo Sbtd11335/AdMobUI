@@ -9,9 +9,9 @@
 import SwiftUI
 
 extension View {
-    public func nativeAdAnchor(_ anchorViewType: NativeAdChildViewType) -> some View {
+    public func nativeAdElement(_ elementViewType: NativeAdChildViewType) -> some View {
         anchorPreference(key: NamedAnchorBoundsPreferenceKey.self, value: .bounds) { anchor in
-            return [anchorViewType.rawValue: anchor]
+            return [elementViewType.rawValue: anchor]
         }
     }
 }
