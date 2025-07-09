@@ -6,9 +6,9 @@ AdMobUI allows you to create AdMob native ads with fully SwiftUI.
 
 AdMobUI works by overlaying an invisible [`NativeAdView`](https://developers.google.com/admob/ios/api/reference/Classes/GADNativeAdView) on top of a SwiftUI view given inside the `NativeAdvertisement` closure.  
 
-Each element of the native ad provided to the closure can be annotated with the `nativeAdAnchor` modifier, which automatically aligns and sizes the transparent [`NativeAdView`](https://developers.google.com/admob/ios/api/reference/Classes/GADNativeAdView) overlay.  
+Each element of the native ad provided to the closure can be annotated with the `nativeAdElement` modifier, which automatically aligns and sizes the transparent [`NativeAdView`](https://developers.google.com/admob/ios/api/reference/Classes/GADNativeAdView) overlay.  
 
-Internally, `nativeAdAnchor` uses `anchorPreference` and `overlayPreferenceValue` to capture the bounds of the annotated elements, enabling the layout of [`NativeAdView`](https://developers.google.com/admob/ios/api/reference/Classes/GADNativeAdView) to be computed automatically.
+Internally, `nativeAdElement` uses `anchorPreference` and `overlayPreferenceValue` to capture the bounds of the annotated elements, enabling the layout of [`NativeAdView`](https://developers.google.com/admob/ios/api/reference/Classes/GADNativeAdView) to be computed automatically.
 
 ## Example
 
@@ -26,19 +26,19 @@ struct ContentView: View {
                         Image(uiImage: icon)
                             .resizable()
                             .scaledtoFit()
-                            .nativeAdAnchor(.icon) // You must annotate with `nativeAdAnchor(:_)`
+                            .nativeAdElement(.icon) // You must annotate with `nativeAdElement(:_)`
                     }
     
                     VStack {
                         if let headline = loadedAd.headline {
                             Text(headline)
                                 .font(.headline)
-                                .nativeAdAnchor(.headline)  // You must annotate with `nativeAdAnchor(:_)`
+                                .nativeAdElement(.headline)  // You must annotate with `nativeAdElement(:_)`
                         }
 
                         if let body = loadedAd.body {
                             Text(body)
-                                .nativeAdAnchor(.body)  // You must annotate with `nativeAdAnchor(:_)`
+                                .nativeAdElement(.body)  // You must annotate with `nativeAdElement(:_)`
                         }
                     }
                 }
