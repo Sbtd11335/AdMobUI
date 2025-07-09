@@ -15,6 +15,6 @@ internal struct NamedAnchorBoundsPreferenceKey: PreferenceKey {
         value: inout [String: SwiftUI.Anchor<CGRect>]?,
         nextValue: () -> [String: SwiftUI.Anchor<CGRect>]?
     ) {
-        value = value?.merging(nextValue() ?? [:]) { _, newValue in newValue}
+        value = value?.merging(nextValue() ?? [:]) { _, newValue in newValue }
     }
 }
