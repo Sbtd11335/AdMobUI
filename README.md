@@ -55,7 +55,7 @@ struct ContentView: View {
 - [ ] Implement support to inject custom AdLoader implementations.
   ```swift
   NativeAdvertisement { loadedAd in
-      .... layout some ad
+      // .... layout some ad
   }
   .environment(\.adLoader, CustomAdLoader())
   ```
