@@ -4,11 +4,11 @@ AdMobUI allows you to create AdMob native ads with fully SwiftUI.
 
 ## How it works
 
-AdMobUI works by overlaying an invisible `NativeAdView` on top of a SwiftUI view given inside the `NativeAdvertisement` closure.  
+AdMobUI works by overlaying an invisible [`NativeAdView`](https://developers.google.com/admob/ios/api/reference/Classes/GADNativeAdView) on top of a SwiftUI view given inside the `NativeAdvertisement` closure.  
 
-Each element of the native ad provided to the closure can be annotated with the `nativeAdAnchor` modifier, which automatically aligns and sizes the transparent `NativeAdView` overlay.  
+Each element of the native ad provided to the closure can be annotated with the `nativeAdAnchor` modifier, which automatically aligns and sizes the transparent [`NativeAdView`](https://developers.google.com/admob/ios/api/reference/Classes/GADNativeAdView) overlay.  
 
-Internally, `nativeAdAnchor` uses `anchorPreference` and `overlayPreferenceValue` to capture the bounds of the annotated elements, enabling the layout of `NativeAdView` to be computed automatically.
+Internally, `nativeAdAnchor` uses `anchorPreference` and `overlayPreferenceValue` to capture the bounds of the annotated elements, enabling the layout of [`NativeAdView`](https://developers.google.com/admob/ios/api/reference/Classes/GADNativeAdView) to be computed automatically.
 
 ## Example
 
