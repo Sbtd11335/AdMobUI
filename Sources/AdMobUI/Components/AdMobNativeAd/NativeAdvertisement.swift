@@ -52,10 +52,9 @@ public struct NativeAdvertisement<AdContent: View>: View {
                         nativeAd: loadedAd,
                         elementFrames: elementFrames
                     )
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .frame(width: overlayGeometry.size.width, height: overlayGeometry.size.height)
                 }
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .onAppear {
                 nativeAdLoader.loadAd()
             }
