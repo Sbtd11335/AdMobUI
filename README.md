@@ -26,19 +26,19 @@ struct ContentView: View {
                         Image(uiImage: icon)
                             .resizable()
                             .scaledtoFit()
-                            .nativeAdAnchor(.icon)
+                            .nativeAdAnchor(.icon) // You must annotate with `nativeAdAnchor(:_)`
                     }
     
                     VStack {
                         if let headline = loadedAd.headline {
                             Text(headline)
                                 .font(.headline)
-                                .nativeAdAnchor(.headline)
+                                .nativeAdAnchor(.headline)  // You must annotate with `nativeAdAnchor(:_)`
                         }
 
                         if let body = loadedAd.body {
                             Text(body)
-                                .nativeAdAnchor(.body)
+                                .nativeAdAnchor(.body)  // You must annotate with `nativeAdAnchor(:_)`
                         }
                     }
                 }
