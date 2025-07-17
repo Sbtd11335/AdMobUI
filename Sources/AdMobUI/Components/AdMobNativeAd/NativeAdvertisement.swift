@@ -14,11 +14,11 @@ public struct NativeAdvertisement<AdContent: View>: View {
 
     private let adUnitId: String
 
-    @ViewBuilder private let adContent: (_ loadedAd: NativeAd?, _ error: (any Error)?) -> AdContent
+    @ViewBuilder private let adContent: (_ advertisementPhase: NativeAdvertisementPhase) -> AdContent
 
     public init(
         adUnitId: String,
-        @ViewBuilder adContent: @escaping (_ loadedAd: NativeAd?, _ error: (any Error)?) -> AdContent
+        @ViewBuilder adContent: @escaping (_ advertisementPhase: NativeAdvertisementPhase) -> AdContent
     ) {
         self.adContent = adContent
         self.adUnitId = adUnitId
@@ -33,7 +33,7 @@ public struct NativeAdvertisement<AdContent: View>: View {
     public var body: some View {
         let loadedAd = nativeAdLoader.loadedAd
 
-        adContent(loadedAd, nativeAdLoader.error)
+        adContent(nativeAdLoader.nativeAdvertisementPhase)
             .overlayPreferenceValue(TypedAnchorBoundsPreferenceKey.self, alignment: .center) { namedAnchors in
                 GeometryReader { overlayGeometry in
                     let elementFrames: [ElementFrame] = namedAnchors.map {

@@ -11,12 +11,12 @@ import GoogleMobileAds
 
 internal class NativeAdLoader: NSObject, ObservableObject {
     @Published private(set) var loadedAd: NativeAd?
-    @Published private(set) var error: (any Error)?
+    @Published private(set) var nativeAdvertisementPhase: NativeAdvertisementPhase = .empty
 
     private let adLoader: AdLoader
 
     init(adUnitId: String) {
-        self.adLoader = AdLoader(
+        adLoader = AdLoader(
             adUnitID: adUnitId,
             rootViewController: nil,
             adTypes: [.native],
@@ -38,9 +38,10 @@ extension NativeAdLoader {
 extension NativeAdLoader: NativeAdLoaderDelegate {
     func adLoader(_ adLoader: AdLoader, didReceive nativeAd: NativeAd) {
         self.loadedAd = nativeAd
+        self.nativeAdvertisementPhase = .success(nativeAd)
     }
 
     func adLoader(_ adLoader: AdLoader, didFailToReceiveAdWithError error: any Error) {
-        self.error = error
+        self.nativeAdvertisementPhase = .failure(error)
     }
 }
