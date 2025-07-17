@@ -6,7 +6,7 @@
 //  
 //
 
-import GoogleMobileAds
+@preconcurrency import GoogleMobileAds
 
 public enum NativeAdvertisementPhase: Sendable {
     case empty
