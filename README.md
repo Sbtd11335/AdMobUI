@@ -20,29 +20,31 @@ import AdMobUI
 struct ContentView: View {
     var body: some View {
         List {
-            NativeAdvertisement(adUnitId: "ca-pub-xxxxxx") { loadedAd, _ in
-                HStack {
-                    if let icon = loadedAd.icon.image {
-                        Image(uiImage: icon)
-                            .resizable()
-                            .scaledtoFit()
-                            .nativeAdElement(.icon) // You must annotate with `nativeAdElement(:_)`
-                    }
-    
-                    VStack {
-                        if let headline = loadedAd.headline {
-                            Text(headline)
-                                .font(.headline)
-                                .nativeAdElement(.headline)  // You must annotate with `nativeAdElement(:_)`
+            NativeAdvertisement(adUnitId: "ca-pub-xxxxxx") { advertisementPhase in
+                if case .success(let loadedAd) = advertisementPhase {
+                    HStack {
+                        if let icon = loadedAd.icon.image {
+                            Image(uiImage: icon)
+                                .resizable()
+                                .scaledtoFit()
+                                .nativeAdElement(.icon) // You must annotate with `nativeAdElement(:_)`
                         }
 
-                        if let body = loadedAd.body {
-                            Text(body)
-                                .nativeAdElement(.body)  // You must annotate with `nativeAdElement(:_)`
+                        VStack {
+                            if let headline = loadedAd.headline {
+                                Text(headline)
+                                    .font(.headline)
+                                    .nativeAdElement(.headline)  // You must annotate with `nativeAdElement(:_)`
+                            }
+
+                            if let body = loadedAd.body {
+                                Text(body)
+                                    .nativeAdElement(.body)  // You must annotate with `nativeAdElement(:_)`
+                            }
                         }
                     }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
             .listRowInsets(EdgeInsets())
         }
