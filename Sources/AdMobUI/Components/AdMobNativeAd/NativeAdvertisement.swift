@@ -34,19 +34,14 @@ public struct NativeAdvertisement<AdContent: View>: View {
         let loadedAd = nativeAdLoader.loadedAd
 
         adContent(loadedAd, nativeAdLoader.error)
-            .overlayPreferenceValue(NamedAnchorBoundsPreferenceKey.self, alignment: .center) { namedAnchors in
+            .overlayPreferenceValue(TypedAnchorBoundsPreferenceKey.self, alignment: .center) { namedAnchors in
                 GeometryReader { overlayGeometry in
-                    let elementFrames: [NativeAdChildViewType: CGRect] =
-                        (try? namedAnchors?.reduce<[NativeAdChildViewType: CGRect]>([:]) {
-                            partialResult, namedAnchor in
-                            let (name, anchor) = namedAnchor
-
-                            let viewType: NativeAdChildViewType? = .init(rawValue: name)
-
-                            guard let viewType else { return partialResult }
-
-                            return partialResult.merging([viewType: overlayGeometry[anchor]]) { $1 }
-                        }) ?? [:]
+                    let elementFrames: [ElementFrame] = namedAnchors.map {
+                        .init(
+                            elementType: $0.viewType,
+                            frame: overlayGeometry[$0.anchor]
+                        )
+                    }
 
                     _RepresentedUINativeAdView(
                         nativeAd: loadedAd,

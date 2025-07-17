@@ -19,3 +19,5 @@ public enum NativeAdChildViewType: String {
     case media
     case adChoices
 }
+
+extension NativeAdChildViewType: Equatable {}

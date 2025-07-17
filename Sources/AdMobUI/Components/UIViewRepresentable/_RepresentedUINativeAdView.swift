@@ -9,11 +9,16 @@
 import GoogleMobileAds
 import SwiftUI
 
+internal struct ElementFrame {
+    let elementType: NativeAdChildViewType
+    let frame: CGRect
+}
+
 internal struct _RepresentedUINativeAdView: UIViewRepresentable {
     typealias UIViewType = _UINativeAdView
 
     internal let nativeAd: NativeAd?
-    internal let elementFrames: [NativeAdChildViewType: CGRect]
+    internal let elementFrames: [ElementFrame]
 
     internal func makeUIView(context: Context) -> _UINativeAdView {
         let nativeAdView = _UINativeAdView()
@@ -37,7 +42,10 @@ internal struct _RepresentedUINativeAdView: UIViewRepresentable {
         }
 
         // 各要素ビュー更新・追加
-        elementFrames.forEach { type, frame in
+        elementFrames.forEach { elementFrame in
+            let type: NativeAdChildViewType = elementFrame.elementType
+            let frame: CGRect = elementFrame.frame
+
             let view: UIView = {
                 switch type {
                 case .headline:

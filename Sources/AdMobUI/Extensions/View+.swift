@@ -10,8 +10,8 @@ import SwiftUI
 
 extension View {
     public func nativeAdElement(_ elementViewType: NativeAdChildViewType) -> some View {
-        anchorPreference(key: NamedAnchorBoundsPreferenceKey.self, value: .bounds) { anchor in
-            return [elementViewType.rawValue: anchor]
+        anchorPreference(key: TypedAnchorBoundsPreferenceKey.self, value: .bounds) { anchor in
+            return [TypedAnchor(viewType: elementViewType, anchor: anchor)]
         }
     }
 }
