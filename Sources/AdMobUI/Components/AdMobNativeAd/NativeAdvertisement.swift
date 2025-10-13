@@ -29,6 +29,20 @@ public struct NativeAdvertisement<AdContent: View>: View {
             )
         )
     }
+    
+    public init(
+        adLoader: AdLoader,
+        @ViewBuilder adContent: @escaping (_ advertisementPhase: NativeAdvertisementPhase) -> AdContent
+    ) {
+        self.adContent = adContent
+        self.adUnitId = adLoader.adUnitID
+
+        _nativeAdLoader = StateObject(
+            wrappedValue: NativeAdLoader(
+                adLoader: adLoader
+            )
+        )
+    }
 
     public var body: some View {
         let loadedAd = nativeAdLoader.loadedAd
@@ -51,7 +65,10 @@ public struct NativeAdvertisement<AdContent: View>: View {
                 }
             }
             .onAppear {
-                nativeAdLoader.loadAd()
+                nativeAdLoader.onAppear()
+            }
+            .onDisappear {
+                nativeAdLoader.onDisappear()
             }
     }
 }
