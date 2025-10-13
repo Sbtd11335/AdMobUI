@@ -18,14 +18,30 @@ public struct NativeAdvertisement<AdContent: View>: View {
 
     public init(
         adUnitId: String,
+        ofType nativeAdLoader: NativeAdLoader.Type = NativeAdLoader.self,
         @ViewBuilder adContent: @escaping (_ advertisementPhase: NativeAdvertisementPhase) -> AdContent
     ) {
         self.adContent = adContent
         self.adUnitId = adUnitId
 
         _nativeAdLoader = StateObject(
-            wrappedValue: NativeAdLoader(
+            wrappedValue: nativeAdLoader.init(
                 adUnitId: adUnitId
+            )
+        )
+    }
+    
+    public init(
+        adLoader: AdLoader,
+        ofType nativeAdLoader: NativeAdLoader.Type = NativeAdLoader.self,
+        @ViewBuilder adContent: @escaping (_ advertisementPhase: NativeAdvertisementPhase) -> AdContent
+    ) {
+        self.adContent = adContent
+        self.adUnitId = adLoader.adUnitID
+
+        _nativeAdLoader = StateObject(
+            wrappedValue: nativeAdLoader.init(
+                adLoader: adLoader
             )
         )
     }
@@ -51,7 +67,10 @@ public struct NativeAdvertisement<AdContent: View>: View {
                 }
             }
             .onAppear {
-                nativeAdLoader.loadAd()
+                nativeAdLoader.onAppear()
+            }
+            .onDisappear {
+                nativeAdLoader.onDisappear()
             }
     }
 }
