@@ -18,7 +18,7 @@ public struct NativeAdvertisement<AdContent: View>: View {
 
     public init(
         adUnitId: String,
-        ofType nativeAdLoader: NativeAdLoader.Type,
+        ofType nativeAdLoader: NativeAdLoader.Type = NativeAdLoader.self,
         @ViewBuilder adContent: @escaping (_ advertisementPhase: NativeAdvertisementPhase) -> AdContent
     ) {
         self.adContent = adContent
@@ -33,7 +33,7 @@ public struct NativeAdvertisement<AdContent: View>: View {
     
     public init(
         adLoader: AdLoader,
-        ofType nativeAdLoader: NativeAdLoader.Type,
+        ofType nativeAdLoader: NativeAdLoader.Type = NativeAdLoader.self,
         @ViewBuilder adContent: @escaping (_ advertisementPhase: NativeAdvertisementPhase) -> AdContent
     ) {
         self.adContent = adContent
