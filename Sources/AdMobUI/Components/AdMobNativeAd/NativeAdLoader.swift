@@ -32,15 +32,15 @@ open class NativeAdLoader: NSObject, ObservableObject, NativeAdLoaderDelegate {
         adLoader.delegate = self
     }
     
-    open func loadAd() {
+    func loadAd() {
         adLoader.load(Request())
     }
     
-    open func onAppear() {
+    public func onAppear() {
         loadAd()
     }
     
-    open func onDisappear() {}
+    public func onDisappear() {}
     
     public func adLoader(_ adLoader: AdLoader, didReceive nativeAd: NativeAd) {
         self.loadedAd = nativeAd
