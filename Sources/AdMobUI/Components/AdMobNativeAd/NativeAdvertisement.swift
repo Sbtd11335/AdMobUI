@@ -18,14 +18,13 @@ public struct NativeAdvertisement<AdContent: View>: View {
 
     public init(
         adUnitId: String,
-        ofType nativeAdLoader: NativeAdLoader.Type,
         @ViewBuilder adContent: @escaping (_ advertisementPhase: NativeAdvertisementPhase) -> AdContent
     ) {
         self.adContent = adContent
         self.adUnitId = adUnitId
 
         _nativeAdLoader = StateObject(
-            wrappedValue: nativeAdLoader.init(
+            wrappedValue: NativeAdLoader(
                 adUnitId: adUnitId
             )
         )
@@ -33,14 +32,13 @@ public struct NativeAdvertisement<AdContent: View>: View {
     
     public init(
         adLoader: AdLoader,
-        ofType nativeAdLoader: NativeAdLoader.Type,
         @ViewBuilder adContent: @escaping (_ advertisementPhase: NativeAdvertisementPhase) -> AdContent
     ) {
         self.adContent = adContent
         self.adUnitId = adLoader.adUnitID
 
         _nativeAdLoader = StateObject(
-            wrappedValue: nativeAdLoader.init(
+            wrappedValue: NativeAdLoader(
                 adLoader: adLoader
             )
         )
