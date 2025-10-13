@@ -14,7 +14,7 @@ open class NativeAdLoader: NSObject, ObservableObject, NativeAdLoaderDelegate {
     private let adUnitId: String
     private let adLoader: AdLoader
     
-    required public init(adUnitId: String) {
+    init(adUnitId: String) {
         self.adUnitId = adUnitId
         adLoader = AdLoader(
             adUnitID: adUnitId,
@@ -25,7 +25,7 @@ open class NativeAdLoader: NSObject, ObservableObject, NativeAdLoaderDelegate {
         adLoader.delegate = self
     }
     
-    required public init(adLoader: AdLoader) {
+    init(adLoader: AdLoader) {
         self.adLoader = adLoader
         self.adUnitId = adLoader.adUnitID
         super.init()
