@@ -19,9 +19,19 @@ internal struct _RepresentedUINativeAdView: UIViewRepresentable {
 
     internal let nativeAd: NativeAd?
     internal let elementFrames: [ElementFrame]
+    internal let nativeAdView = _UINativeAdView()
 
+    init(nativeAd: NativeAd?, elementFrames: [ElementFrame], nativeAdLoader: NativeAdLoader) {
+        self.nativeAd = nativeAd
+        self.elementFrames = elementFrames
+        let view = nativeAdView
+        nativeAdLoader.destroyView = { [weak view] in
+            view?.removeFromSuperview()
+            view?.nativeAd = nil
+        }
+    }
+    
     internal func makeUIView(context: Context) -> _UINativeAdView {
-        let nativeAdView = _UINativeAdView()
         nativeAdView.backgroundColor = .clear
         nativeAdView.isUserInteractionEnabled = true
 

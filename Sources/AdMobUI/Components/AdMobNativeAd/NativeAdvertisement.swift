@@ -14,19 +14,23 @@ public struct NativeAdvertisement<AdContent: View>: View {
 
     private let adUnitId: String
 
-    @ViewBuilder private let adContent: (_ advertisementPhase: NativeAdvertisementPhase) -> AdContent
+    @ViewBuilder private let adContent: (_ advertisementPhase: NativeAdvertisementPhase, _ nativeAdLoader: NativeAdLoader) -> AdContent
 
+    @State private var representedUINativeAdView: _RepresentedUINativeAdView? = nil
+    
     public init(
         adUnitId: String,
         ofType nativeAdLoader: NativeAdLoader.Type = NativeAdLoader.self,
-        @ViewBuilder adContent: @escaping (_ advertisementPhase: NativeAdvertisementPhase) -> AdContent
+        listener: NativeAdListener? = nil,
+        @ViewBuilder adContent: @escaping (_ advertisementPhase: NativeAdvertisementPhase, _ nativeAdLoader: NativeAdLoader) -> AdContent
     ) {
         self.adContent = adContent
         self.adUnitId = adUnitId
 
         _nativeAdLoader = StateObject(
             wrappedValue: nativeAdLoader.init(
-                adUnitId: adUnitId
+                adUnitId: adUnitId,
+                listener: listener
             )
         )
     }
@@ -34,14 +38,16 @@ public struct NativeAdvertisement<AdContent: View>: View {
     public init(
         adLoader: AdLoader,
         ofType nativeAdLoader: NativeAdLoader.Type = NativeAdLoader.self,
-        @ViewBuilder adContent: @escaping (_ advertisementPhase: NativeAdvertisementPhase) -> AdContent
+        listener: NativeAdListener? = nil,
+        @ViewBuilder adContent: @escaping (_ advertisementPhase: NativeAdvertisementPhase, _ nativeAdLoader: NativeAdLoader) -> AdContent
     ) {
         self.adContent = adContent
         self.adUnitId = adLoader.adUnitID
 
         _nativeAdLoader = StateObject(
             wrappedValue: nativeAdLoader.init(
-                adLoader: adLoader
+                adLoader: adLoader,
+                listener: listener
             )
         )
     }
@@ -49,7 +55,7 @@ public struct NativeAdvertisement<AdContent: View>: View {
     public var body: some View {
         let loadedAd = nativeAdLoader.loadedAd
 
-        adContent(nativeAdLoader.nativeAdvertisementPhase)
+        adContent(nativeAdLoader.nativeAdvertisementPhase, nativeAdLoader)
             .overlayPreferenceValue(TypedAnchorBoundsPreferenceKey.self, alignment: .center) { namedAnchors in
                 GeometryReader { overlayGeometry in
                     let elementFrames: [ElementFrame] = namedAnchors.map {
@@ -59,11 +65,15 @@ public struct NativeAdvertisement<AdContent: View>: View {
                         )
                     }
 
-                    _RepresentedUINativeAdView(
-                        nativeAd: loadedAd,
-                        elementFrames: elementFrames
-                    )
-                    .frame(width: overlayGeometry.size.width, height: overlayGeometry.size.height)
+                    representedUINativeAdView?.frame(width: overlayGeometry.size.width, height: overlayGeometry.size.height)
+                    Color.clear
+                        .onAppear {
+                            representedUINativeAdView = _RepresentedUINativeAdView(
+                                nativeAd: loadedAd,
+                                elementFrames: elementFrames,
+                                nativeAdLoader: nativeAdLoader
+                            )
+                        }
                 }
             }
             .onAppear {
@@ -72,5 +82,6 @@ public struct NativeAdvertisement<AdContent: View>: View {
             .onDisappear {
                 nativeAdLoader.onDisappear()
             }
+        
     }
 }
